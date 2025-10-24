@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeTrap - Quest for Knowledge</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body data-theme="light">
+    <!-- AUTH PAGE with Background -->
+    <div id="authPage" style="display: flex;">
+        <div class="rpg-background"></div>
+        <div class="auth-glass-card">
+            <h1 class="rpg-title pixel-text">TIMETRAP</h1>
+            <p class="rpg-subtitle">⚔️ Quest for Knowledge ⚔️</p>
+
+            <!-- LOGIN FORM -->
+            <div id="loginFormContainer" class="rpg-form" style="display: block;">
+                <h2 class="pixel-text">⚡ LOGIN ⚡</h2>
+                <form id="loginForm" onsubmit="event.preventDefault(); login();">
+                    <div class="form-group">
+                        <label class="pixel-label">USERNAME</label>
+                        <input type="text" id="loginUsername" class="pixel-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="pixel-label">PASSWORD</label>
+                        <input type="password" id="loginPassword" class="pixel-input" required>
+                    </div>
+                    <button type="submit" class="rpg-btn primary">START QUEST</button>
+                </form>
+                <p class="auth-switch">
+                    New Hero? <a href="#" onclick="showSignupForm(); return false;" class="pixel-link">CREATE CHARACTER</a>
+                </p>
+            </div>
+
+            <!-- SIGNUP FORM -->
+            <div id="signupFormContainer" class="rpg-form" style="display: none;">
+                <h2 class="pixel-text">⭐ CREATE HERO ⭐</h2>
+                <form id="signupForm" onsubmit="event.preventDefault(); signup();">
+                    <div class="form-group">
+                        <label class="pixel-label">USERNAME</label>
+                        <input type="text" id="signupUsername" class="pixel-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="pixel-label">EMAIL</label>
+                        <input type="email" id="signupEmail" class="pixel-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="pixel-label">PASSWORD</label>
+                        <input type="password" id="signupPassword" class="pixel-input" required minlength="8">
+                    </div>
+                    <button type="submit" class="rpg-btn primary">BEGIN ADVENTURE</button>
+                </form>
+                <p class="auth-switch">
+                    Returning Hero? <a href="#" onclick="showLoginForm(); return false;" class="pixel-link">LOGIN</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- APP CONTAINER -->
+    <div id="appContainer" style="display: none;">
+        <!-- HEADER -->
+        <header class="rpg-header">
+            <div class="header-content">
+                <h1 class="pixel-text-small">TIMETRAP RPG</h1>
+                <div class="header-right">
+                    <button onclick="toggleTheme()" class="rpg-icon-btn" title="Toggle Theme">
+                        <span id="themeIcon">🌙</span>
+                    </button>
+                    <div class="user-info">
+                        <span class="pixel-name" id="usernameDisplay">Hero</span>
+                        <span class="gold-badge">💰 <span id="coinBalance">0</span> GOLD</span>
+                    </div>
+                    <button onclick="logout()" class="rpg-btn secondary">QUIT</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION -->
+        <nav class="rpg-nav">
+            <button onclick="showPage('dashboard')" class="nav-btn active">🏰 GUILD HALL</button>
+            <button onclick="showPage('timer')" class="nav-btn">⏰ QUEST</button>
+            <button onclick="showPage('analytics')" class="nav-btn">📊 STATS</button>
+            <button onclick="showPage('shop')" class="nav-btn">🏪 SHOP</button>
+            <button onclick="showPage('rooms')" class="nav-btn">👥 TAVERN</button>
+        </nav>
+
+        <!-- PAGES -->
+        <main class="app-main">
+            <!-- DASHBOARD -->
+            <div id="dashboardPage" class="page">
+                <div class="dashboard-layout">
+                    <!-- LARGE ANALYTICS CARD -->
+                    <div class="analytics-big-card">
+                        <h2 class="pixel-text-medium">📈 HERO STATISTICS</h2>
+                        <div class="big-stats-grid">
+                            <div class="big-stat">
+                                <span class="stat-label">QUESTS COMPLETED</span>
+                                <span class="stat-value-big" id="totalSessions">0</span>
+                            </div>
+                            <div class="big-stat">
+                                <span class="stat-label">TIME TRAINED</span>
+                                <span class="stat-value-big" id="totalStudyTime">0h 0m</span>
+                            </div>
+                            <div class="big-stat">
+                                <span class="stat-label">GOLD EARNED</span>
+                                <span class="stat-value-big" id="totalCoins">0</span>
+                            </div>
+                            <div class="big-stat">
+                                <span class="stat-label">HERO RATING</span>
+                                <span class="stat-value-big" id="avgRating">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CREATE ROOM BUTTON -->
+                    <div class="create-room-card">
+                        <h3 class="pixel-text-small">🏰 PARTY UP</h3>
+                        <p class="pixel-desc">Join fellow heroes in the tavern!</p>
+                        <button onclick="showPage('rooms')" class="rpg-btn create-room-big">CREATE PARTY ROOM</button>
+                        <div class="room-decorations">
+                            <span class="pixel-icon">⚔️</span>
+                            <span class="pixel-icon">🛡️</span>
+                            <span class="pixel-icon">🗡️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIMER -->
+            <div id="timerPage" class="page" style="display: none;">
+                <div class="quest-container">
+                    <h2 class="pixel-text-medium">⚔️ ACTIVE QUEST ⚔️</h2>
+                    <div class="pixel-timer" id="sessionTimer">00:00:00</div>
+                    <div class="timer-controls">
+                        <button id="startSessionBtn" onclick="startSession()" class="rpg-btn quest-btn">START QUEST</button>
+                        <button id="endSessionBtn" onclick="endSession()" class="rpg-btn danger-btn" style="display: none;">COMPLETE QUEST</button>
+                    </div>
+                    <div class="quest-flavor">
+                        <p class="pixel-desc">⏳ Train your skills and earn gold!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANALYTICS -->
+            <div id="analyticsPage" class="page" style="display: none;">
+                <h2 class="pixel-text-medium">📊 HERO CHRONICLES</h2>
+                <div class="charts-rpg">
+                    <div class="chart-card-rpg">
+                        <h3 class="pixel-text-small">Weekly Training</h3>
+                        <canvas id="weeklyChart"></canvas>
+                    </div>
+                    <div class="chart-card-rpg">
+                        <h3 class="pixel-text-small">Quest Ratings</h3>
+                        <canvas id="ratingsChart"></canvas>
+                    </div>
+                </div>
+                <div id="sessionsList" class="sessions-list-rpg"></div>
+            </div>
+
+            <!-- SHOP -->
+            <div id="shopPage" class="page" style="display: none;">
+                <h2 class="pixel-text-medium">🏪 MERCHANT'S SHOP</h2>
+                <p class="shop-balance-rpg">Your Purse: <span class="gold-badge-large">💰 <span id="shopCoinBalance">0</span> GOLD</span></p>
+                <div class="shop-grid-rpg">
+                    <div class="shop-item-rpg">
+                        <div class="item-icon">⏰</div>
+                        <h3 class="pixel-text-tiny">BREAK TIME</h3>
+                        <p class="item-desc">1 Hour Rest</p>
+                        <div class="item-footer">
+                            <span class="price-tag">100💰</span>
+                            <button onclick="purchaseItem('Break Time', 100)" class="rpg-btn-small">BUY</button>
+                        </div>
+                    </div>
+                    <div class="shop-item-rpg">
+                        <div class="item-icon">🎮</div>
+                        <h3 class="pixel-text-tiny">GAME SCROLL</h3>
+                        <p class="item-desc">2 Hours Gaming</p>
+                        <div class="item-footer">
+                            <span class="price-tag">200💰</span>
+                            <button onclick="purchaseItem('Gaming Time', 200)" class="rpg-btn-small">BUY</button>
+                        </div>
+                    </div>
+                    <div class="shop-item-rpg">
+                        <div class="item-icon">🍕</div>
+                        <h3 class="pixel-text-tiny">FEAST</h3>
+                        <p class="item-desc">Pizza Night</p>
+                        <div class="item-footer">
+                            <span class="price-tag">150💰</span>
+                            <button onclick="purchaseItem('Pizza Night', 150)" class="rpg-btn-small">BUY</button>
+                        </div>
+                    </div>
+                    <div class="shop-item-rpg">
+                        <div class="item-icon">🎬</div>
+                        <h3 class="pixel-text-tiny">THEATER</h3>
+                        <p class="item-desc">Movie Time</p>
+                        <div class="item-footer">
+                            <span class="price-tag">120💰</span>
+                            <button onclick="purchaseItem('Movie Time', 120)" class="rpg-btn-small">BUY</button>
+                        </div>
+                    </div>
+                    <div class="shop-item-rpg">
+                        <div class="item-icon">☕</div>
+                        <h3 class="pixel-text-tiny">POTION</h3>
+                        <p class="item-desc">Coffee Break</p>
+                        <div class="item-footer">
+                            <span class="price-tag">50💰</span>
+                            <button onclick="purchaseItem('Coffee Break', 50)" class="rpg-btn-small">BUY</button>
+                        </div>
+                    </div>
+                    <div class="shop-item-rpg">
+                        <div class="item-icon">🎉</div>
+                        <h3 class="pixel-text-tiny">FESTIVAL</h3>
+                        <p class="item-desc">Social Event</p>
+                        <div class="item-footer">
+                            <span class="price-tag">300💰</span>
+                            <button onclick="purchaseItem('Social Event', 300)" class="rpg-btn-small">BUY</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STUDY ROOMS -->
+            <div id="roomsPage" class="page" style="display: none;">
+                <h2 class="pixel-text-medium">🏰 THE TAVERN</h2>
+                <div class="rooms-header-rpg">
+                    <button onclick="showCreateRoomModal()" class="rpg-btn">CREATE PARTY</button>
+                </div>
+                <div id="roomsList" class="rooms-grid-rpg">
+                    <p class="loading-text-rpg">🔍 Searching for parties...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- CREATE ROOM MODAL -->
+    <div id="createRoomModal" class="modal-rpg" style="display: none;">
+        <div class="modal-content-rpg">
+            <h2 class="pixel-text-medium">🏰 CREATE PARTY</h2>
+            <form id="createRoomForm" onsubmit="event.preventDefault(); createRoom();">
+                <div class="form-group">
+                    <label class="pixel-label">PARTY NAME</label>
+                    <input type="text" id="roomName" class="pixel-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="pixel-label">DESCRIPTION</label>
+                    <textarea id="roomDescription" class="pixel-input" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="pixel-label">MAX HEROES</label>
+                    <input type="number" id="roomMaxPart" class="pixel-input" value="6" min="2" max="10">
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="rpg-btn primary">CREATE</button>
+                    <button type="button" onclick="closeCreateRoomModal()" class="rpg-btn secondary">CANCEL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

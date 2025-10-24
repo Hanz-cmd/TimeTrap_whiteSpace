@@ -1,0 +1,588 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    image-rendering: pixelated;
+}
+
+:root {
+    --pixel-bg: #0a0e27;
+    --pixel-surface: #1a1f3a;
+    --pixel-accent: #ffd700;
+    --pixel-primary: #ff6b6b;
+    --pixel-success: #4ecdc4;
+    --text-primary: #ffffff;
+    --text-secondary: #b8c5d6;
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] {
+    --pixel-bg: #000000;
+    --pixel-surface: #1a0f2e;
+}
+
+body {
+    font-family: 'Press Start 2P', cursive;
+    background: var(--pixel-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+/* ==================== AUTH PAGE ==================== */
+#authPage {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.rpg-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('download.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7);
+    z-index: 0;
+}
+
+.auth-glass-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(10, 14, 39, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 3px solid rgba(255, 215, 0, 0.3);
+    border-radius: 0;
+    padding: 3rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.2),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+    animation: floatIn 0.8s ease-out;
+}
+
+@keyframes floatIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.rpg-title {
+    text-align: center;
+    font-size: 28px;
+    color: #ffd700;
+    text-shadow: 3px 3px 0 #000, 
+                 0 0 10px #ffd700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 3px;
+}
+
+.rpg-subtitle {
+    text-align: center;
+    font-size: 10px;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.rpg-form h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 16px;
+    color: #4ecdc4;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.pixel-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 10px;
+    color: #ffd700;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.pixel-input {
+    width: 100%;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid #ffd700;
+    color: #fff;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    transition: all 0.3s;
+}
+
+.pixel-input:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    box-shadow: 0 0 15px rgba(78, 205, 196, 0.5);
+}
+
+.rpg-btn {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(180deg, #ff6b6b 0%, #c92a2a 100%);
+    color: #fff;
+    border: 3px solid #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 0 #000, 0 0 10px rgba(255, 107, 107, 0.5);
+    text-shadow: 1px 1px 0 #000;
+}
+
+.rpg-btn:hover {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #000, 0 0 15px rgba(255, 107, 107, 0.8);
+}
+
+.rpg-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 #000;
+}
+
+.rpg-btn.primary {
+    background: linear-gradient(180deg, #ffd700 0%, #daa520 100%);
+    color: #000;
+}
+
+.rpg-btn.secondary {
+    background: linear-gradient(180deg, #666 0%, #333 100%);
+}
+
+.auth-switch {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 9px;
+    color: #b8c5d6;
+}
+
+.pixel-link {
+    color: #4ecdc4;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 #000;
+}
+
+.pixel-link:hover {
+    color: #ffd700;
+}
+
+/* ==================== APP HEADER ==================== */
+.rpg-header {
+    background: linear-gradient(180deg, #1a1f3a 0%, #0a0e27 100%);
+    padding: 1rem 2rem;
+    border-bottom: 4px solid #ffd700;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.pixel-text-small {
+    font-size: 14px;
+    color: #ffd700;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.rpg-icon-btn {
+    background: rgba(255, 215, 0, 0.2);
+    border: 2px solid #ffd700;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.rpg-icon-btn:hover {
+    background: rgba(255, 215, 0, 0.4);
+    transform: scale(1.1);
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.pixel-name {
+    font-size: 10px;
+    color: #4ecdc4;
+}
+
+.gold-badge {
+    background: linear-gradient(180deg, #ffd700 0%, #daa520 100%);
+    padding: 0.5rem 1rem;
+    border: 2px solid #000;
+    font-size: 10px;
+    color: #000;
+    box-shadow: 0 2px 0 #000;
+}
+
+/* ==================== NAVIGATION ==================== */
+.rpg-nav {
+    background: #0a0e27;
+    padding: 0.5rem 2rem;
+    display: flex;
+    gap: 0.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    border-bottom: 2px solid #1a1f3a;
+    overflow-x: auto;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 2px solid #333;
+    color: #b8c5d6;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.nav-btn:hover, .nav-btn.active {
+    background: linear-gradient(180deg, #ff6b6b 0%, #c92a2a 100%);
+    border-color: #000;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+}
+
+/* ==================== MAIN CONTENT ==================== */
+.app-main {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.page {
+    background: linear-gradient(180deg, #1a1f3a 0%, #0a0e27 100%);
+    padding: 2rem;
+    border: 3px solid #ffd700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+/* ==================== DASHBOARD LAYOUT ==================== */
+.dashboard-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.analytics-big-card {
+    background: linear-gradient(180deg, #1a1f3a 0%, #0a0e27 100%);
+    border: 3px solid #4ecdc4;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+}
+
+.pixel-text-medium {
+    font-size: 16px;
+    color: #4ecdc4;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 1.5rem;
+}
+
+.big-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.big-stat {
+    background: rgba(78, 205, 196, 0.1);
+    border: 2px solid #4ecdc4;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 8px;
+    color: #b8c5d6;
+    margin-bottom: 1rem;
+}
+
+.stat-value-big {
+    display: block;
+    font-size: 24px;
+    color: #ffd700;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.create-room-card {
+    background: linear-gradient(180deg, #ff6b6b 0%, #c92a2a 100%);
+    border: 3px solid #000;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+.pixel-desc {
+    font-size: 9px;
+    color: #fff;
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.rpg-btn.create-room-big {
+    margin-top: 1rem;
+    font-size: 11px;
+    padding: 1.5rem;
+}
+
+.room-decorations {
+    margin-top: 2rem;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* ==================== TIMER PAGE ==================== */
+.quest-container {
+    text-align: center;
+    padding: 3rem;
+}
+
+.pixel-timer {
+    font-size: 4rem;
+    color: #ffd700;
+    text-shadow: 4px 4px 0 #000, 0 0 20px #ffd700;
+    margin: 2rem 0;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.timer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.quest-btn {
+    font-size: 12px;
+    padding: 1.5rem 3rem;
+}
+
+.danger-btn {
+    background: linear-gradient(180deg, #c92a2a 0%, #5f0909 100%);
+}
+
+.quest-flavor {
+    margin-top: 2rem;
+}
+
+/* ==================== SHOP ==================== */
+.shop-balance-rpg {
+    text-align: center;
+    font-size: 10px;
+    margin-bottom: 2rem;
+}
+
+.gold-badge-large {
+    background: linear-gradient(180deg, #ffd700 0%, #daa520 100%);
+    padding: 0.75rem 1.5rem;
+    border: 3px solid #000;
+    font-size: 14px;
+    color: #000;
+    box-shadow: 0 4px 0 #000;
+}
+
+.shop-grid-rpg {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.shop-item-rpg {
+    background: rgba(26, 31, 58, 0.8);
+    border: 3px solid #ffd700;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.shop-item-rpg:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+}
+
+.item-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.pixel-text-tiny {
+    font-size: 10px;
+    color: #4ecdc4;
+    margin-bottom: 0.5rem;
+}
+
+.item-desc {
+    font-size: 8px;
+    color: #b8c5d6;
+    margin-bottom: 1rem;
+}
+
+.item-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.price-tag {
+    font-size: 11px;
+    color: #ffd700;
+}
+
+.rpg-btn-small {
+    padding: 0.5rem 1rem;
+    background: linear-gradient(180deg, #4ecdc4 0%, #2a9d8f 100%);
+    color: #000;
+    border: 2px solid #000;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 8px;
+    cursor: pointer;
+}
+
+/* ==================== CHARTS ==================== */
+.charts-rpg {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.chart-card-rpg {
+    background: rgba(26, 31, 58, 0.8);
+    border: 2px solid #4ecdc4;
+    padding: 1.5rem;
+}
+
+/* ==================== ROOMS ==================== */
+.rooms-grid-rpg {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.room-card-rpg {
+    background: rgba(26, 31, 58, 0.8);
+    border: 3px solid #ffd700;
+    padding: 1.5rem;
+}
+
+/* ==================== MODAL ==================== */
+.modal-rpg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content-rpg {
+    background: linear-gradient(180deg, #1a1f3a 0%, #0a0e27 100%);
+    border: 4px solid #ffd700;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.modal-actions button {
+    flex: 1;
+}
+
+/* ==================== SESSIONS LIST ==================== */
+.sessions-list-rpg {
+    margin-top: 2rem;
+}
+
+.session-item-rpg {
+    background: rgba(26, 31, 58, 0.6);
+    border-left: 4px solid #4ecdc4;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    font-size: 9px;
+}
+
+.loading-text-rpg {
+    text-align: center;
+    font-size: 10px;
+    color: #b8c5d6;
+    padding: 2rem;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .big-stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pixel-timer {
+        font-size: 2.5rem;
+    }
+
+    .shop-grid-rpg {
+        grid-template-columns: 1fr;
+    }
+}
