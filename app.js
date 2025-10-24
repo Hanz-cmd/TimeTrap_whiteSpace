@@ -1,6 +1,6 @@
 // StudyFlow Enhanced - Complete JavaScript
 // API Configuration
-const API_URL = 'https://aahans.pythonanywhere.com/';
+const API_URL = 'https://aahans.pythonanywhere.com/api';
 let currentUser = null;
 let sessionStartTime = null;
 let sessionTimer = null;
