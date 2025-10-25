@@ -1,6 +1,6 @@
 // StudyFlow Enhanced - Complete JavaScript
 // API Configuration
-const API_URL = 'https://aahans.pythonanywhere.com/api';
+const API_URL = 'https://timetrapwhitespace-production.up.railway.app/api';
 let currentUser = null;
 let sessionStartTime = null;
 let sessionTimer = null;
